@@ -13,38 +13,51 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Checkout the repository
+      # 1. Checkout repository
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # 2. Set Up Node.js Environment
+      # 2. Install pnpm FIRST (specific version 10.0.0)
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.0.0 # Explicit exact version
+        id: pnpm-install
+
+      # 3. Verify pnpm is in PATH
+      - name: Add pnpm to PATH
+        run: |
+          echo "pnpm path: ${{ steps.pnpm-install.outputs.pnpm_path }}"
+          echo "${{ steps.pnpm-install.outputs.pnpm_path }}" >> $GITHUB_PATH
+
+      # 4. Set up Node.js AFTER pnpm
       - name: Set Up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "20"
 
-      # 3. Setup pnpm using the official action (specify exact version)
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: "10.8.2"  # Exact version to ensure installation
-          run_install: false
+      # 5. Verify installations
+      - name: Check Versions
+        run: |
+          node --version
+          npm --version
+          pnpm --version  # Critical check
 
-      # 4. Install Dependencies and Global Packages
-      - name: Install Dependencies and Global Packages
+      # 6. Install dependencies
+      - name: Install Dependencies
         run: |
           pnpm install --frozen-lockfile --strict-peer-dependencies
           pnpm add -g gulp prettier typescript
 
-      # 5. Run Release Script
+      # 7. Run release script
       - name: Run Release
         run: pnpm run release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # 6. Push Changes Back to Repository
+      # 8. Push changes
       - name: Push Changes
         uses: ad-m/github-push-action@v0.6.0
         with:
