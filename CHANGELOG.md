@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.3](https://github.com/lucaperullo/template-vite-chakra-template/compare/v0.0.2...v0.0.3) (2025-01-24)
+
+
+### Bug Fixes
+
+* removed myself ([dc42bbc](https://github.com/lucaperullo/template-vite-chakra-template/commit/dc42bbcd6b67a391368b9e27d760441df55bd0ec))
+
 ### 0.0.2 (2025-01-24)
 
 
