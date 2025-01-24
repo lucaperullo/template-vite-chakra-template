@@ -1,22 +1,23 @@
-# Chakra UI 3.0 + Vite Template
+# Chakra UI 3.5.1 + Vite Template
 
-Questo template ti permette di iniziare rapidamente a sviluppare applicazioni con **Chakra UI 3.0** e **Vite**. È già preconfigurato per TypeScript e PNPM.
+This template allows you to quickly start developing applications with **Chakra UI 3.0** and **Vite**. It comes pre-configured with **TypeScript** and **PNPM** for an efficient development experience.
 
-## Prerequisiti
+## Prerequisites
 
-Prima di iniziare, assicurati di avere:
+Before you begin, ensure you have the following installed:
 
-- **Node.js** versione 16 o successiva
-- **PNPM** installato (puoi installarlo con `npm install -g pnpm`)
+- **Node.js** version 16 or higher
+- **PNPM** installed (you can install it with `npm install -g pnpm`)
 
-## Come iniziare
+## Getting Started
 
-1. **Clona il repository**
+Follow these steps to set up the project:
 
-   ```bash
-   git clone <URL_DEL_REPOSITORY>
-   cd <NOME_CARTELLA_REPOSITORY>
-   ```
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/lucaperullo/template-vite-chakra-template CHOOSE-PROJECT-NAME && cd CHOOSE-PROJECT-NAME
+```
 
 2. **Installa le dipendenze**
 
@@ -30,48 +31,43 @@ Prima di iniziare, assicurati di avere:
    ```
    Apri il browser su `http://localhost:3000` per visualizzare l'applicazione.
 
-## Struttura del progetto
+## Project Structure
 
-- `src/`: Contiene il codice sorgente dell'app.
-- `public/`: Contiene asset statici.
-- `index.html`: Entry point dell'app.
-- `vite.config.ts`: Configurazione di Vite.
-
-## Chakra UI
-
-Questo template include **Chakra UI 3.0**, una libreria di componenti React. Puoi personalizzare il tema seguendo questi passi:
-
-1. **Modifica il file del tema:**
-   Puoi personalizzare il tema modificando o creando un file tema in `src/theme` (esempio: `theme.ts`).
-
-2. **Usa i componenti Chakra UI:**
-   Importa e utilizza i componenti Chakra nei tuoi file React. Esempio:
-
-   ```tsx
-   import { Button } from "@chakra-ui/react";
-
-   function App() {
-     return <Button colorScheme="blue">Cliccami</Button>;
-   }
-
-   export default App;
-   ```
+```plaintext
+├── src/
+│   ├── App.tsx
+│   ├── components/
+│   │   └── ui/           # Reusable UI components
+│   ├── theme/           # Theme customization
+│   ├── main.tsx         # Application entry point
+│   └── vite-env.d.ts
+├── public/               # Static assets
+├── index.html            # HTML entry point
+├── vite.config.ts        # Vite configuration
+├── tsconfig.json         # TypeScript configuration
+├── tsconfig.node.json    # TypeScript configuration for Node
+├── .eslintrc.js          # ESLint configuration
+├── .prettierrc           # Prettier configuration
+├── package.json          # Project metadata and dependencies
+├── pnpm-lock.yaml        # PNPM lock file
+└── README.md             # You are reading it. :)
+```
 
 ## Comandi utili
 
-- **Avvia il server di sviluppo:**
+- **Starts development server:**
 
   ```bash
   pnpm dev
   ```
 
-- **Build del progetto:**
+- **Builds the project:**
 
   ```bash
   pnpm build
   ```
 
-- **Serve la build in locale:**
+- **Serve the build in local:**
 
   ```bash
   pnpm preview
@@ -82,10 +78,16 @@ Questo template include **Chakra UI 3.0**, una libreria di componenti React. Puo
   pnpm lint
   ```
 
-## Contribuire
+## 🤝 Contribution Guide
 
-Se vuoi contribuire al progetto, crea un fork e apri una pull request con le tue modifiche.
+### 1. Clone the repository
 
----
+### 2. Create your feature branch (git checkout -b feat/amazing-feature)
 
-**Buon coding! 🚀**
+### 3. Commit changes (git commit -m 'Add amazing feature')
+
+### 4. Push to branch (git push origin feat/amazing-feature)
+
+### 5. Open a Pull Request
+
+**Happy coding! 🚀**
