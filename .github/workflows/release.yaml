@@ -17,28 +17,26 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Fetch all history for standard-version
+          fetch-depth: 0
 
       # 2. Set Up Node.js Environment
       - name: Set Up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20" # Specify your Node.js version
-          cache: "pnpm" # Enable caching for pnpm dependencies
+          node-version: "20"
 
-      # 3. Setup pnpm using the official action
+      # 3. Setup pnpm using the official action (specify exact version)
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: "10" # Specify pnpm version 10.x
-          run_install: false # We'll run install manually with custom args
+          version: "10.8.2"  # Exact version to ensure installation
+          run_install: false
 
       # 4. Install Dependencies and Global Packages
       - name: Install Dependencies and Global Packages
         run: |
           pnpm install --frozen-lockfile --strict-peer-dependencies
           pnpm add -g gulp prettier typescript
-        shell: bash
 
       # 5. Run Release Script
       - name: Run Release
