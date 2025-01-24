@@ -1,11 +1,17 @@
 {
   "name": "vite-ts",
   "private": true,
-  "version": "1.0.2",
+  "version": "0.0.1",
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
+    "dev": "pnpm exec vite",
+    "build": "pnpm exec vite build",
+    "preview": "pnpm exec vite preview",
+    "release": "standard-version"
   },
   "dependencies": {
     "@chakra-ui/react": "^3.4.0",
@@ -20,9 +26,12 @@
     "@types/react": "^18.3.11",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
+    "commitizen": "^4.3.1",
+    "standard-version": "^9.5.0",
     "typescript": "^5.7.2",
     "vite": "^6.0.7",
     "vite-plugin-aliases": "^0.0.1",
+    "vite-plugin-checker": "^0.8.0",
     "vite-tsconfig-paths": "^5.1.4"
   }
 }
