@@ -1,7 +1,10 @@
-name: Release
+name: Release Workflow
 
 on:
   push:
+    branches:
+      - main
+  pull_request:
     branches:
       - main
 
@@ -12,24 +15,30 @@ jobs:
     steps:
       # 1. Checkout the repository
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0 # Fetch all history for standard-version
 
-      # 2. Set up Node.js environment
+      # 2. Set Up Node.js Environment
       - name: Set Up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: "16" # Specify your Node.js version
-          cache: "pnpm"
+          node-version: "20" # Specify your Node.js version
+          cache: "pnpm" # Enable caching for pnpm dependencies
 
-      # 3. Install pnpm
-      - name: Install pnpm
-        run: npm install -g pnpm
+      # 3. Setup pnpm using the official action
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: "10" # Specify pnpm version 10.x
+          run_install: false # We'll run install manually with custom args
 
-      # 4. Install Dependencies
-      - name: Install Dependencies
-        run: pnpm install
+      # 4. Install Dependencies and Global Packages
+      - name: Install Dependencies and Global Packages
+        run: |
+          pnpm install --frozen-lockfile --strict-peer-dependencies
+          pnpm add -g gulp prettier typescript
+        shell: bash
 
       # 5. Run Release Script
       - name: Run Release
