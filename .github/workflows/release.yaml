@@ -4,60 +4,41 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
 jobs:
   release:
     runs-on: ubuntu-latest
-
     steps:
-      # 1. Checkout repository
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # 2. Install pnpm FIRST (specific version 10.0.0)
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 10.0.0 # Explicit exact version
-        id: pnpm-install
+          version: 10.0.0
 
-      # 3. Verify pnpm is in PATH
-      - name: Add pnpm to PATH
-        run: |
-          echo "pnpm path: ${{ steps.pnpm-install.outputs.pnpm_path }}"
-          echo "${{ steps.pnpm-install.outputs.pnpm_path }}" >> $GITHUB_PATH
-
-      # 4. Set up Node.js AFTER pnpm
       - name: Set Up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "20"
 
-      # 5. Verify installations
-      - name: Check Versions
-        run: |
-          node --version
-          npm --version
-          pnpm --version  # Critical check
-
-      # 6. Install dependencies
       - name: Install Dependencies
         run: |
-          pnpm install --frozen-lockfile --strict-peer-dependencies
-          pnpm add -g gulp prettier typescript
+          pnpm install --strict-peer-dependencies
+          pnpm add -g standard-version gulp prettier typescript
 
-      # 7. Run release script
+      - name: Set Git Identity
+        run: |
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
       - name: Run Release
         run: pnpm run release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # 8. Push changes
       - name: Push Changes
         uses: ad-m/github-push-action@v0.6.0
         with:
