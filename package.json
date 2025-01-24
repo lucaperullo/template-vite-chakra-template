@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "pnpm exec vite",
     "build": "pnpm exec vite build",
-    "preview": "pnpm exec vite preview"
+    "preview": "pnpm exec vite preview",
+    "release": "standard-version && git push --follow-tags origin main"
   },
   "dependencies": {
     "@chakra-ui/react": "^3.4.0",
@@ -20,6 +21,7 @@
     "@types/react": "^18.3.11",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
+    "standard-version": "^9.5.0",
     "typescript": "^5.7.2",
     "vite": "^6.0.7",
     "vite-plugin-aliases": "^0.0.1",
