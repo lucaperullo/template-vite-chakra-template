@@ -1,79 +1,26 @@
-// src/App.js
-import React, { useState } from "react";
-import {
-  Box,
-  Button,
-  ClientOnly,
-  Skeleton,
-  Text,
-  HStack,
-  VStack,
-} from "@chakra-ui/react";
-import { FaReact } from "react-icons/fa";
-import { SiVite, SiChakraui } from "react-icons/si";
-import { ColorModeButton } from "./components/ui/color-mode";
-import IconMask from "./components/ui/icon-mask";
+import { Routes, Route } from "react-router";
+import { Login } from "./pages/Login";
+import { Signup } from "./pages/Signup";
+import { Home } from "./pages/Home";
+import { Schedule } from "./pages/Schedule";
+import { Calendar } from "./pages/Calendar";
+import React from "react";
 
-function App() {
-  const [count, setCount] = useState(0);
-
+export const App = () => {
   return (
-    <>
-      {/* Color Mode Toggle Button */}
-      <Box pos="absolute" top="4" right="4">
-        <ClientOnly fallback={<Skeleton w="10" h="10" rounded="md" />}>
-          <ColorModeButton />
-        </ClientOnly>
-      </Box>
+    <Routes>
+      {/* Public routes without sidebar */}
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
 
-      {/* Main Content */}
-      <Box textAlign="center" fontSize="xl" pt="2vh">
-        <VStack mt="20">
-          {/* Welcome Message with Icons */}
-          <Box>
-            <Text fontSize="2xl" mb="4">
-              Welcome to
-              <HStack as="span" ml={2}>
-                <Text as="span">Vite</Text>
-                <IconMask fontSize="2xl" color="cyan.500">
-                  <SiVite />
-                </IconMask>
-                <Text as="span"> + ChakraUI 3</Text>
-                <IconMask fontSize="2xl" color="teal.500">
-                  <SiChakraui />
-                </IconMask>
-                <Text as="span"> + React</Text>
-                <IconMask fontSize="2xl" color="blue.400">
-                  <FaReact />
-                </IconMask>
-              </HStack>
-            </Text>
-          </Box>
+      {/* Protected routes with sidebar layout */}
 
-          {/* Simple Counter */}
-          <Box>
-            <Text fontSize="2xl" mb="4">
-              Simple Counter
-            </Text>
-            <HStack justify="center">
-              <Button colorScheme="teal" onClick={() => setCount(count + 1)}>
-                Increment
-              </Button>
-              <Button colorScheme="red" onClick={() => setCount(count - 1)}>
-                Decrement
-              </Button>
-              <Button colorScheme="gray" onClick={() => setCount(0)}>
-                Reset
-              </Button>
-            </HStack>
-            <Text mt="4" fontSize="lg">
-              Current Count: {count}
-            </Text>
-          </Box>
-        </VStack>
-      </Box>
-    </>
+      <Route path="/home" element={<Home />} />
+      <Route path="/schedule" element={<Schedule />} />
+      <Route path="/calendar" element={<Calendar />} />
+
+      {/* Catch-all route for authenticated users */}
+      <Route path="/*" element={<Home />} />
+    </Routes>
   );
-}
-
-export default App;
+};
